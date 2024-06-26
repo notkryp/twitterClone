@@ -1,15 +1,18 @@
 import express from "express";
+import {
+  isAuthenticatedUser,
+  login,
+  logout,
+  signup,
+} from "../controllers/auth.js";
+import { protectRoute } from "../middleware/protectRoute.js";
 
 const router = express.Router();
 
-router.post("/signup", (req, res) => {
-  res.json({ message: "This is Signup Route" });
-});
-router.post("/login", (req, res) => {
-  res.json({ message: "This is login Route" });
-});
-router.post("/logout", (req, res) => {
-  res.json({ message: "This is logout Route" });
-});
+router.post("/signup", signup);
+router.post("/login", login);
+router.post("/logout", logout);
+
+router.get("/userauthcheck", protectRoute, isAuthenticatedUser);
 
 export default router;
