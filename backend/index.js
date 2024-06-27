@@ -1,8 +1,9 @@
 import express from "express";
 import * as dotenv from "dotenv";
-import authRoutes from "./routes/authRoutes.js";
-import postRoutes from "./routes/postRoutes.js";
+import authRoutes from "./routes/authRoute.js";
+import postRoutes from "./routes/postRoute.js";
 import userRoute from "./routes/userRoute.js";
+import notiRoutes from "./routes/notiRoute.js";
 import { mongoConn } from "./db/connectMongo.js";
 import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/user", userRoute);
+app.use("/api/notifications", notiRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

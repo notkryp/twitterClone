@@ -39,7 +39,7 @@ export const followUnfollowUser = async (req, res) => {
       // follow user
       await User.findByIdAndUpdate(id, { $push: { followers: req.user._id } });
       await User.findByIdAndUpdate(req.user._id, { $push: { following: id } });
-      // return id of the user
+      //TODO:  return id of the user
       res.status(200).json({ message: "User followed" });
 
       const newNotification = new Notification({
@@ -48,7 +48,7 @@ export const followUnfollowUser = async (req, res) => {
         to: userToModify.id,
       });
       await newNotification.save();
-      // return id of the user
+      //TODO: return id of the user
       res.status(200).json({ message: "User Followed Successfully" });
     }
   } catch (error) {
@@ -119,7 +119,7 @@ export const updateUserProfile = async (req, res) => {
           error: "Current Password must be at lesat 6 characters Long",
         });
       }
-      
+
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(currentPassword, salt);
     }
